@@ -1,5 +1,5 @@
 keras
-lingua
+lingua-language-detector
 matplotlib
 nltk
 numpy
