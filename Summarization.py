@@ -2,8 +2,6 @@
 # coding: utf-8
 
 # ## Install and import the needed libraries
-get_ipython().run_cell_magic('capture', '', '!pip install transformers\n!pip install sentencepiece\n!pip install datasets\n!pip install rouge_score\n!pip install evaluate\n!pip install torch\n!pip3 install torch torchvision\n!pip install lingua-language-detector\n!pip3 install -U numpy\n!pip3 install googletrans==3.1.0a0')
-
 import transformers
 import nltk
 import pandas as pd
