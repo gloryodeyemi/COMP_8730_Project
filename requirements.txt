@@ -12,5 +12,5 @@ sentencepiece
 datasets
 rouge_score
 evaluate
-torch torchvision
+torchvision
 googletrans==3.1.0a0
