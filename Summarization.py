@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # ## Install and import the needed libraries
 import transformers
 import nltk
