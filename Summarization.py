@@ -19,34 +19,37 @@ from torch.utils.data import DataLoader
 from transformers import Seq2SeqTrainingArguments
 from transformers import Seq2SeqTrainer
 
-
+print("---------- Downloading punkt package ----------")
 nltk.download('punkt')
-
+print()
 
 # ## Import and split dataset into train, test, and validation
-
+print("---------- Loading the dataset ----------")
 file_loc = "Data/twitter_data.csv"
 dataset = load_dataset("csv", data_files=file_loc)
+print()
 print("---------- Dataset ----------")
 print(dataset)
+print()
 
+print("---------- Splitting the dataset into train, test, and validation ----------")
 datasets_train_test = dataset["train"].train_test_split(test_size=0.1, seed=0)
 datasets_train_validation = datasets_train_test["train"].train_test_split(test_size=0.1, seed=0)
 
 dataset["train"] = datasets_train_validation["train"]
 dataset["test"] = datasets_train_test["test"]
 dataset["validation"] = datasets_train_validation["test"]
+print()
 
-print("---------- Updatad dataset ----------")
+print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
 print(dataset["train"][4])
+print()
 
 
 # ### Language Identification
 # Identify the language of each token in the tweet using the lingua library.
-
-
 def identify(tweet):
   languages = [Language.ENGLISH, Language.YORUBA]
   detector = LanguageDetectorBuilder.from_languages(*languages).build()
@@ -59,42 +62,48 @@ def identify(tweet):
       lang_list.append(lang.name)
   return lang_list
 
+print("---------- Identifying the language ----------")
+print()
 dataset = dataset.map(lambda x: {"Language": identify(x['Tweets'])})
-print("---------- Updatad dataset ----------")
+print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
 print(dataset["train"][4])
+print()
 
 
 # ### Step 2: Code-switch detection
 # Detect the language switch in the tweet using regular expression
-
 def detect(tweet):
   return re.findall(r'\b\w+\b', tweet)
-  
+
+print("---------- Code-switching detection ----------")
+print()
 dataset = dataset.map(lambda x: {"Code_switches": detect(x['Tweets'])})
 print("---------- Updatad dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
 print(dataset["train"][4])
+print()
 
 
 # ### Step 3: Translation
 # Translate each tweet using google translate
-
 def translate_tweet(tweet):
   return translator.translate(tweet, src='yo', dest='en').text
 
+print("---------- Translation ----------")
+print()
 translator = Translator()
 dataset = dataset.map(lambda x: {"Translated_tweet": translate_tweet(x['Tweets'])})
 print("---------- Updatad dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
 print(dataset["train"][4])
+print()
 
 
 # #### Evaluate the performance of the translator using BLEU (Bilingual Evaluation Understudy) metric
-
 import nltk
 from nltk.translate.bleu_score import corpus_bleu, SmoothingFunction
 
@@ -124,32 +133,37 @@ def compute_bleu_score(predictions, references):
 
 
 # **We calculated the bleu score for each tweet and compute the average.**
-
-# dataset = dataset.map(lambda x: {"Bleu_score": compute_bleu_score([x['Translated_tweet']], [x['Eng_source']])})
+print("---------- Computing BLEU score ----------")
+print()
 dataset = dataset.map(lambda x: {"Bleu_score": compute_bleu_score([x['Translated_tweet']], [x['Eng_source']])})
 print("---------- Updatad dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
 print(dataset["train"][4])
+print()
 
 from statistics import mean
-
-# bleu = mean(dataset["train"]["Bleu_score"])
+print("---------- BLEU score ----------")
 bleu = mean(dataset["train"]["Bleu_score"])
 print(f"Bleu score: {bleu:.4f}")
+print()
 
 
 # ### Step 4: Summarization
 # Fine-tune the BART model for summarization and evaluate its performance using the ROUGE metrics.
+print("---------- Summarization ----------")
+print()
 
 # define the variables
 max_input = 512
 max_target = 128
 batch_size = 3
 model_checkpoints = "facebook/bart-base"
+print()
 
 # toenize the data
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoints)
+print()
 
 # preprocess the data
 def preprocess_data(data_to_process):
@@ -167,17 +181,25 @@ def preprocess_data(data_to_process):
   #return the tokenized data
   return model_inputs
 
+print("---------- Data preprocessing ----------")
 tokenize_data = dataset.map(preprocess_data, batched = True)
+print()
 
 # load the model
+print("---------- Loading the model ----------")
 model = AutoModelForSeq2SeqLM.from_pretrained(model_checkpoints)
+print()
 
+print("---------- Data collator ----------")
 collator = DataCollatorForSeq2Seq(
     tokenizer,
     model=model,
     return_tensors="pt")
+print()
 
+print("---------- Loading the ROUGE metric ----------")
 rouge_metric = evaluate.load("rouge")
+print()
 
 # define function for custom tokenization
 def tokenize_sentence(arg):
@@ -211,6 +233,8 @@ def compute_rouge(eval_arg):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 
+print("---------- Fine-tuning the model ----------")
+print()
 # set parameters for training the model
 args = Seq2SeqTrainingArguments(
     'code-switch-summ', 
@@ -239,11 +263,13 @@ trainer = Seq2SeqTrainer(
 )
 
 # train the model
+print("---------- Training the model ----------")
 trainer.train()
+print()
 
 
 # ### Test fine-tuned model on Test data
-
+print("---------- Testing the model ----------")
 #tokenize the conversation
 model_inputs = tokenizer(dataset["test"]["Translated_tweet"][6],  max_length=max_input, padding='max_length', truncation=True)
 #make prediction
