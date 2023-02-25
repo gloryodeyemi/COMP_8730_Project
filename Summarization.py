@@ -25,7 +25,7 @@ nltk.download('punkt')
 
 # ## Import and split dataset into train, test, and validation
 
-file_loc = filepath
+file_loc = "Data/twitter_data.csv"
 dataset = load_dataset("csv", data_files=file_loc)
 print("---------- Dataset ----------")
 print(dataset)
