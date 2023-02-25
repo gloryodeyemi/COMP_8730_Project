@@ -7,3 +7,10 @@ pandas
 scikit_learn
 seaborn
 tensorflow
+transformers
+sentencepiece
+datasets
+rouge_score
+evaluate
+torch torchvision
+googletrans==3.1.0a0
