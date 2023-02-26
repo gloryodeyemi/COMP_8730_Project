@@ -24,9 +24,11 @@ pip install -r requirements.txt
 
 * **[data_collection.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/data_collection.ipynb):** A python notebook that shows you the procedure of collecting tweets from Twitter using the Twitter API and tweepy python library.
 
+* **[quick_start.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/quick_start.ipynb):** A python notebook that shows a successful run of the project using the quickstart guideline.
+
 * **[Summarization.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/Summarization.ipynb) and [Summarization.py](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/Summarization.py)** are python notebook and script that shows the procedure of summarizing tweets with English-Yoruba code switches and the result gotten.
 
-## Quickstart
+## Quickstart Guideline
 1. Clone the repository
 ``` 
 git clone https://github.com/gloryodeyemi/COMP_8730_Project.git 
