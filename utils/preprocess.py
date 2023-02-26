@@ -1,4 +1,4 @@
-get_ipython().system('pip install lingua-language-detector')
+get_ipython().system('pip install lingua-language-detector==1.1.0')
 
 # import all the needed libraries
 import nltk
@@ -6,9 +6,6 @@ import pandas as pd
 import string
 import re
 from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.stem.porter import PorterStemmer
-from nltk.stem import WordNetLemmatizer
-from nltk import pos_tag, ne_chunk
 from lingua import Language, LanguageDetectorBuilder
 
 # download the needed modules
@@ -60,7 +57,7 @@ def data_average(data):
     print("Average of values in numerical columns")
     print("--------------------------------------")
     print(data.mean(axis=0, numeric_only = True))
-    
+
 # function to remove punctuations in the text
 def remove_punctuation(text):
     without_punc = "".join([i for i in text if i not in string.punctuation])
@@ -70,28 +67,6 @@ def remove_punctuation(text):
 def tokenize_text(text):
     tokens = word_tokenize(text.lower())
     return tokens
-
-# defining the object for stemming
-porter_stemmer = PorterStemmer()
-
-
-# function for stemming
-def stemming(text):
-    stem_text = [porter_stemmer.stem(word) for word in text]
-    return stem_text
-
-# defining the object for lemmatization
-wordnet_lemmatizer = WordNetLemmatizer()
-
-# function for lemmatization
-def lemmatizer(text):
-    lemm_text = [wordnet_lemmatizer.lemmatize(word) for word in text]
-    return lemm_text
-
-# function for entity recognition
-def NER(text):
-    ner_text = ne_chunk(pos_tag(text))
-    return ner_text
 
 """
     function to get number of english and yoruba words from the code-switch tweets 
