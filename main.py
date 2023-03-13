@@ -79,7 +79,7 @@ trainer = summarize.model_trainer(model, tokenize_data, collator)
 trainer.train()
 
 # test the model
-index = 7
+index = 8
 output = summarize.test_model(dataset, index, trainer)
 print("Original tweet: ", dataset["test"]["Tweets"][index])
 print("Translated tweet: ", dataset["test"]["Translated_tweet"][index])
