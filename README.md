@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ## Structure
 * **[Data](https://github.com/gloryodeyemi/COMP_8730_Project/tree/main/Data):** contains the data file used for this project.
 
-* **[utils](https://github.com/gloryodeyemi/COMP_8730_Project/tree/main/utils):** contains the essential functions used for the data analysis.
+* **[utils](https://github.com/gloryodeyemi/COMP_8730_Project/tree/main/utils):** contains the essential functions used for the project.
 
 * **[data_analysis.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/data_analysis.ipynb):** A python notebook that uses the function in the utils to analyse the data used in this project. The results gives information about the data.
 
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 * **[quick_start.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/quick_start.ipynb):** A python notebook that shows a successful run of the project using the quickstart guideline.
 
-* **[Summarization.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/Summarization.ipynb) and [Summarization.py](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/Summarization.py)** are python notebook and script that shows the procedure of summarizing tweets with English-Yoruba code switches and the result gotten.
+* **[main.ipynb](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/main.ipynb) and [main.py](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/main.py)** are python notebook and script that utilizes the functions in utils to show the procedure of summarizing tweets with English-Yoruba code switches and the result gotten.
 
 ## Quickstart Guideline
 1. Clone the repository
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 ```
 4. Run the script
 ```
-python Summarization.py
+python main.py
 ```
 
 ## License
