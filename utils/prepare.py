@@ -27,6 +27,32 @@ def identified(dataset):
     dataset = dataset.map(lambda x: {"Language": identify(x['Tweets'])})
     return dataset
 
+def detect_code_switch(tweet):
+    # Define a regular expression pattern to match English and Yoruba words
+    en_pattern = r'[A-Za-z]+'
+    yo_pattern = r'[aàáèéiìíoòóuùúeẹẹ́ọọ́gbṣsAEẸIOỌU]+'
+
+    # Split the tweet into words
+    words = tweet.split()
+
+    # Initialize a list to store the detected code-switches
+    code_switches = []
+
+    # Loop through each pair of adjacent words
+    for i in range(len(words) - 1):
+        # Check if the current word and the next word belong to different languages
+        if re.match(en_pattern, words[i]) and re.match(yo_pattern, words[i+1]):
+            code_switches.append((words[i], words[i+1]))
+        elif re.match(yo_pattern, words[i]) and re.match(en_pattern, words[i+1]):
+            code_switches.append((words[i], words[i+1]))
+
+    # Return the list of code-switches
+    return code_switches
+
 def detect(dataset):
-    dataset = dataset.map(lambda x: {"Code_switches": re.findall(r'\b\w+\b', x['Tweets'])})
-    return dataset 
+    dataset = dataset.map(lambda x: {"Code_switches": detect_code_switch(x['Tweets'])})
+    return dataset
+
+# def detect(dataset):
+#     dataset = dataset.map(lambda x: {"Code_switches": re.findall(r'\b\w+\b', x['Tweets'])})
+#     return dataset
