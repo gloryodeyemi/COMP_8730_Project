@@ -5,8 +5,8 @@ The goal of this experiment is to summarize tweets with English and Yoruba code 
 
 ## The Data
 The [twitter_data](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/Data/twitter_data.csv) csv file has three columns:
-* **Tweets:** Tweets with code-switches collected from Twitter using the Twitter API with Twitter developer account credentials and a python library - [Tweepy](https://www.tweepy.org/). 
-* **Eng_source:** Human annotated English translation of the tweets. 
+* **Tweets:** Tweets with code-switches.
+* **Eng_source:** English source of the tweets. 
 * **Summary:** Human annotated summary of the tweets.
 
 ## Requirements
