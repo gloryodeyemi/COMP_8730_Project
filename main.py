@@ -18,7 +18,7 @@ dataset = split_data(dataset)
 print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
-print(dataset["train"][4])
+print(dataset["train"][31])
 
 
 # ### Language Identification
@@ -27,7 +27,7 @@ dataset = identified(dataset)
 print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
-print(dataset["train"][4])
+print(dataset["train"][31])
 
 
 # ### Step 2: Code-switch detection
@@ -36,7 +36,7 @@ dataset = detect(dataset)
 print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
-print(dataset["train"][4])
+print(dataset["train"][31])
 
 
 # ### Step 3: Translation
@@ -45,7 +45,7 @@ dataset = translate_tweet(dataset)
 print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
-print(dataset["train"][4])
+print(dataset["train"][31])
 
 
 # #### Evaluate the performance of the translator using BLEU (Bilingual Evaluation Understudy) metric
@@ -54,7 +54,7 @@ dataset = computed_bleu_score(dataset)
 print("---------- Updated dataset ----------")
 print(dataset)
 print("---------- Example output ----------")
-print(dataset["train"][4])
+print(dataset["train"][31])
 
 bleu_avg(dataset)
 
@@ -78,8 +78,11 @@ trainer = summarize.model_trainer(model, tokenize_data, collator)
 # train the model
 trainer.train()
 
+# evaluate the model
+trainer.evaluate()
+
 # test the model
-index = 8
+index = 16
 output = summarize.test_model(dataset, index, trainer)
 print("Original tweet: ", dataset["test"]["Tweets"][index])
 print("Translated tweet: ", dataset["test"]["Translated_tweet"][index])

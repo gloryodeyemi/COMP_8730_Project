@@ -19,7 +19,7 @@ class Summarize:
     # define the variables
     max_input = 512
     max_target = 128
-    batch_size = 3
+    batch_size = 8
     model_checkpoints = "facebook/bart-base"
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoints)
     rouge_metric = evaluate.load("rouge")
@@ -96,10 +96,10 @@ class Summarize:
             per_device_eval_batch_size= 2,
             gradient_accumulation_steps=2,
             weight_decay=0.01,
-            save_total_limit=2,
+            save_total_limit=4,
             num_train_epochs=3,
             predict_with_generate=True,
-            eval_accumulation_steps=3,
+            eval_accumulation_steps=4,
             # fp16=True ,
             seed = 42
             )
