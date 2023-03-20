@@ -46,6 +46,9 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Baseline
+The Huggingface AutoTrain feature was used to train and evaluate the baseline approach on our dataset. The evaluation metric scores and testing interface can be found [here](https://huggingface.co/Glowcodes/autotrain-code-switched-tweets-sum-42325108532).
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/gloryodeyemi/COMP_8730_Project/blob/main/LICENSE) file for details.
 
